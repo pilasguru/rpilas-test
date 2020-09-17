@@ -4,6 +4,13 @@ phases:
   install:
     runtime-versions:
       golang: 1.13
+    commands:
+    - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 7) 
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase...
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo Building the Go code...
