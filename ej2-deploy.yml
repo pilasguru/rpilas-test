@@ -1,0 +1,33 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: hostname-deploy
+  namespace: rpilas-test
+  labels:
+    name: hostname
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      name: hostname
+  strategy:
+    type: RollingUpdate
+  template:
+      metadata:
+        name: hostname-pod-example
+        labels:
+          name: hostname
+          language: golang
+      spec:
+        containers:
+          - name: hostname
+            image: adongy/hostname-docker
+            ### Port 3000!!!!
+
+
+
+
+
+
+
+
